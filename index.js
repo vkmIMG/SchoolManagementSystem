@@ -7,8 +7,6 @@ const LibraryRoutes = require("./src/routes/library/routes");
 
 app.use(express.json());
 
-app.use('/api/library', libraryRoutes);
-
 //require db
 require("./src/db/config/config");
 app.use("/api/library", LibraryRoutes);
