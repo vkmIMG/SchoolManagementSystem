@@ -1,7 +1,7 @@
 const { getStocks } = require("../../db/services/library/stocks")
 
 // get Stock details
-exports.getStocksController = async (req, res) => {
+exports.getStocks = async (req, res) => {
     try {
         const data = await getStocks(req)
         return res.status(200).json(data)

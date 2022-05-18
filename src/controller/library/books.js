@@ -1,5 +1,5 @@
 //services required 
-const libraryServices = require("../../db/services/library/library");
+const libraryServices = require("../../db/services/library/books");
 
 exports.addBook = async (req, res) => {
     try {
