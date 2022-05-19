@@ -6,6 +6,7 @@ const app = express();
 const LibraryRoutes = require("./src/routes/library/routes");
 
 app.use(express.json());
+app.use(express.urlencoded({extended: false}))
 
 //require db
 require("./src/db/config/config");

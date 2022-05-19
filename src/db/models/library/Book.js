@@ -1,73 +1,75 @@
 const mongoose = require("mongoose");
 
 const BookSchema = mongoose.Schema({
-  code:{
-    type:String,
+  code: {
+    type: String,
     // required:true,
-    default:null,
+    default: "",
   },
   name: {
     type: String,
     required: true,
-    default: null,
+    default: "",
   },
   about: {
     type: String,
     required: true,
-    default: null,
+    default: "",
   },
   author: {
     type: String,
     required: true,
-    default: null,
+    default: "",
   },
   publisher: {
     type: String,
     required: true,
-    default: null,
+    default: "",
   },
   publishDate: {
-    type: Date,
+    type: String,
+    required: true,
+    default: ""
   },
   authority: {
     type: String,
     required: true,
-    default: null,
+    default: "",
   },
   price: {
     type: Number,
     required: true,
-    default: null,
+    default: 0,
   },
   bookImage: {
     type: String,
-    required: true,
-    default: null,
+    // required: true,
+    default: "",
   },
   authorImage: {
     type: String,
-    required: true,
-    default: null,
+    // required: true,
+    default: "",
   },
   noOfPage: {
     type: Number,
     required: true,
-    default: null,
+    default: 0,
   },
   language: {
     type: String,
     required: true,
-    default: null,
+    default: "",
   },
   isbnNo: {
-    type: Number,
+    type: String,
     required: true,
-    default: null,
+    default: "",
   },
-  genre:{
-    type:String,
-    required:true,
-    default:null,
+  genre: {
+    type: String,
+    required: true,
+    default: "",
   }
 });
 
