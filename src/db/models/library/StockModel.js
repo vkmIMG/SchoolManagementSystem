@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const StockSchema = new mongoose.Schema({
+const StockSchema = mongoose.Schema({
   bookid: {
     type: mongoose.Types.ObjectId,
     required: true,
@@ -13,4 +13,6 @@ const StockSchema = new mongoose.Schema({
   },
 });
 
-module.epxorts = mongoose.model("stocks", StockSchema);
+
+const StocksModel = mongoose.model("stocks", StockSchema);
+module.exports = StocksModel;
