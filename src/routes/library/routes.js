@@ -4,10 +4,11 @@ const router = express.Router();
 
 // required Controllers.....
 const { addBook } = require("../../controller/library/books");
-const { getStocks } = require("../../controller/library/stock");
+const { getStocks, insertStocks } = require("../../controller/library/stock");
 
 // routes ........................................
-router.post('/books/addBook', addBook);
-router.post("/stocks/getBookStockDetail", getStocks);
+router.post("/books/addBook", addBook);
+router.post("/stocks/getStock", getStocks);
+router.post("/stocks/insertStock", insertStocks);
 
 module.exports = router;
