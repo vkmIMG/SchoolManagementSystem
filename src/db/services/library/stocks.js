@@ -1,6 +1,9 @@
-const { default: mongoose } = require("mongoose");
+// package required ..............................................
+const mongoose = require("mongoose");
+
+// required DB Models.....................................................
 const BookModel = require("../../models/library/Book");
-const StocksModel = require("../../models/library/StockModel");
+const StocksModel = require("../../models/library/Stock");
 
 exports.getStocks = async (req) => {
   try {
@@ -69,12 +72,12 @@ exports.insertStocks = async (req) => {
           data: insertStocks,
         };
       }
-      return {
-        message: "Enter Valid Book",
-        status: false,
-        data: {},
-      };
     }
+    return {
+      message: "Enter Valid Book",
+      status: false,
+      data: {},
+    };
   } catch (err) {
     return {
       message: err.toString(),

@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const BookSchema = mongoose.Schema({
   code: {
     type: String,
-    // required:true,
+    required:true,
     default: "",
   },
   name: {
@@ -71,7 +71,10 @@ const BookSchema = mongoose.Schema({
     required: true,
     default: "",
   }
+}, {
+  timestamps: true,
+  versionKey: false,
 });
 
-const BookModel = mongoose.model("books", BookSchema);
+const BookModel = mongoose.model("library_books", BookSchema);
 module.exports = BookModel;

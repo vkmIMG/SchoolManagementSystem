@@ -1,12 +1,14 @@
-// required Models.............................
+//packages ...........................
 const moment = require("moment");
+const mongoose = require("mongoose");
+
+// required DB Models.............................
 const BookModel = require("../../models/library/Book");
 
 // add book ......................
 const addBook = async (req) => {
     try {
         let { name, about, author, publisher, publishDate, authority, price, bookImage, authorImage, noOfPage, language, isbnNo, genre } = req.body;
-        console.log("req.body", req.body);
         //validation of fields
         if (!name) {
             return {
@@ -108,7 +110,8 @@ const addBook = async (req) => {
                 data: alreadyExits,
             }
         }
-        let bookData = BookModel({ name, about, author, publisher, publishDate, authority, price, bookImage, authorImage, noOfPage, language, isbnNo, genre });
+        let code = String(Date.now());
+        let bookData = BookModel({ code, name, about, author, publisher, publishDate, authority, price, bookImage, authorImage, noOfPage, language, isbnNo, genre });
         let data = await bookData.save();
         return {
             message: "Added Successfully",
@@ -127,7 +130,7 @@ const addBook = async (req) => {
 // get book .....................
 const getBook = async (req) => {
     try {
-        let data = await BookModel.find();
+        let data = await BookModel.find({}, { _id: 1, name: 1, author: 1, language: 1, genre: 1 });
         if (data && Array.isArray(data) && data.length > 0) {
             return {
                 message: "Book Fetched Successfully",
@@ -150,4 +153,65 @@ const getBook = async (req) => {
     }
 };
 
-module.exports = { addBook, getBook };
+// Book Details ..................
+const bookDetail = async (req) => {
+    try {
+        let bookId = req.body.id;
+        if (bookId && mongoose.Types.ObjectId.isValid(bookId)) {
+            let response = await BookModel.findOne({ _id: bookId });
+            if (response && response !== {}) {
+                return {
+                    message: "Book Details Fetched Successfully",
+                    status: true,
+                    data: response,
+                }
+            }
+        };
+        return {
+            message: "invalid Book ID",
+            status: false,
+            data: {},
+        }
+    } catch (error) {
+        return {
+            message: String(error),
+            status: false,
+            data: {},
+        }
+    }
+};
+
+//search book .............................
+const searchBook = async (req) => {
+    try {
+        let { name } = req.body;
+        if (name) {
+            let result = await BookModel.find({ name: { $regex: name, $options: '$i' } });
+            if (result && Array.isArray(result) && result.length > 0) {
+                return {
+                    message: "Book Found",
+                    status: true,
+                    data: result,
+                };
+            };
+            return {
+                message: "No Book found",
+                status: false,
+                data: {}
+            };
+        };
+        return {
+            message: "required book name",
+            status: false,
+            data: {},
+        }
+    } catch (error) {
+        return {
+            message: String(error),
+            status: false,
+            data: {}
+        }
+    }
+};
+
+module.exports = { addBook, getBook, bookDetail, searchBook };

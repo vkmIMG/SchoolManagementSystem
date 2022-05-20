@@ -11,8 +11,11 @@ const StockSchema = mongoose.Schema({
     required: true,
     default: 0,
   },
+}, {
+  timestamps: true,
+  versionKey: false
 });
 
 
-const StocksModel = mongoose.model("stocks", StockSchema);
+const StocksModel = mongoose.model("library_stocks", StockSchema);
 module.exports = StocksModel;
