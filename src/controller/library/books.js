@@ -51,8 +51,22 @@ exports.searchBook = async (req, res) => {
             res.status(200).json(response);
         } else {
             res.status(400).json(response);
-        }
+        };
     } catch (error) {
         res.status(400).json(String(error));
-    }
-} 
+    };
+};
+
+//search add Book Bulk ...........................
+exports.addBookBulk = async (req, res) => {
+    try {
+        let response = await libraryServices.addBookBulk(req);
+        if (response.status) {
+            res.status(200).json(response);
+        } else {
+            res.status(400).json(response);
+        };
+    } catch (error) {
+        res.status(400).json(String(error));
+    };
+};

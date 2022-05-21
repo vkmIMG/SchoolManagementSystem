@@ -3,8 +3,11 @@ require("dotenv").config();
 // required package......
 const express = require("express");
 const app = express();
+const cors = require("cors");
+//module import ..
 const LibraryRoutes = require("./src/routes/library/routes");
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
